@@ -88,9 +88,9 @@ async function onBasketChange(iossStatus) {
     const estimate = await estimateResp.json();
 
     // Fire custom event for overlay.js to consume
-    window.dispatchEvent(new CustomEvent('landedcost:estimate', { detail: { estimate, items: classified, iossStatus } }));
+    window.dispatchEvent(new CustomEvent('pairlin:estimate', { detail: { estimate, items: classified, iossStatus } }));
   } catch (err) {
-    console.warn('[LandedCost] estimate failed:', err);
+    console.warn('[Pairlin] estimate failed:', err);
   }
 }
 
@@ -109,5 +109,5 @@ function startWatcher(iossStatus) {
   observer.observe(cartEl ?? document.body, { childList: true, subtree: true, characterData: true });
 }
 
-window._landedcost_startWatcher = startWatcher;
-window._landedcost_extractItems = extractItems;
+window._pairlin_startWatcher = startWatcher;
+window._pairlin_extractItems = extractItems;

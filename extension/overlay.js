@@ -1,17 +1,17 @@
 const BACKEND_URL = 'https://your-backend.up.railway.app';
-const CHECKOUT_URL = 'https://app.landedcost.io/checkout';
+const CHECKOUT_URL = 'https://app.pairlin.io/checkout';
 
 function fmt(n) { return '€' + Number(n).toFixed(2); }
 function conf(c) { return `<span class="lc-conf" title="AI confidence">${c}%</span>`; }
 
 function removeExisting() {
-  document.getElementById('landedcost-overlay')?.remove();
+  document.getElementById('pairlin-overlay')?.remove();
 }
 
 function inject(html) {
   removeExisting();
   const div = document.createElement('div');
-  div.id = 'landedcost-overlay';
+  div.id = 'pairlin-overlay';
   div.innerHTML = html;
   document.body.appendChild(div);
 
@@ -55,7 +55,7 @@ function renderDetection(result) {
       </div>
       <div class="lc-body">
         <p class="lc-desc">${desc}</p>
-        <p class="lc-footer">Powered by LandedCost</p>
+        <p class="lc-footer">Powered by Pairlin</p>
       </div>
     </div>
   `);
@@ -101,10 +101,10 @@ function renderIossCostDisplay(estimate, items, pendingOrderData) {
         <p class="lc-note">ℹ️ Confidence scores reflect AI estimates. Actual tariff headings determined by customs.</p>
         <div class="lc-alert lc-amber">
           <strong>⚠️ Even IOSS parcels can be unexpectedly held</strong> at Irish customs due to system errors or spot checks.
-          With LandedCost we monitor your order email and handle payment immediately.
+          With Pairlin we monitor your order email and handle payment immediately.
         </div>
         ${protectBtn}${skipBtn}
-        <p class="lc-footer">Powered by LandedCost</p>
+        <p class="lc-footer">Powered by Pairlin</p>
       </div>
     </div>
   `);
@@ -164,14 +164,14 @@ function renderFullService(estimate, items, iossStatus, pendingOrderData) {
         <div class="lc-divider"></div>
         <div class="lc-comparison">
           <div class="lc-col">
-            <div class="lc-col-label">Without LandedCost</div>
+            <div class="lc-col-label">Without Pairlin</div>
             <div>Pay now: ${fmt(basketTotal)}</div>
             <div>Pay at border: ~${fmt(duty + vat + (courierHandling ?? 6))}</div>
             <div class="lc-col-total">Total: ~${fmt(withoutTotal)}</div>
             <div>+ ${estimatedDelay ?? '10-14 days'} delay</div>
           </div>
           <div class="lc-col lc-col-right">
-            <div class="lc-col-label">With LandedCost</div>
+            <div class="lc-col-label">With Pairlin</div>
             <div>Pay once now: ${fmt(total)}</div>
             <div class="lc-indent">└── Items: ${fmt(basketTotal)}</div>
             <div class="lc-indent">└── Est. customs: ~${fmt(duty + vat)}</div>
@@ -180,9 +180,9 @@ function renderFullService(estimate, items, iossStatus, pendingOrderData) {
           </div>
         </div>
         ${arbitragePanel}
-        <button class="lc-btn" id="lc-pay">Pay once with LandedCost — ${fmt(total)}</button>
+        <button class="lc-btn" id="lc-pay">Pay once with Pairlin — ${fmt(total)}</button>
         <button class="lc-btn lc-btn-ghost" id="lc-proceed">Proceed without cover</button>
-        <p class="lc-footer">Powered by LandedCost · Surplus refunded automatically</p>
+        <p class="lc-footer">Powered by Pairlin · Surplus refunded automatically</p>
       </div>
     </div>
   `);
@@ -237,7 +237,7 @@ function render(estimate, items, iossResult, pendingOrderData) {
   const { isOver150 } = estimate;
 
   // Attach split handler if present
-  window.dispatchEvent(new CustomEvent('landedcost:rendered'));
+  window.dispatchEvent(new CustomEvent('pairlin:rendered'));
 
   setTimeout(() => {
     document.getElementById('lc-split')?.addEventListener('click', () => {
@@ -261,5 +261,5 @@ function render(estimate, items, iossResult, pendingOrderData) {
   }
 }
 
-window._landedcost_render = render;
-window._landedcost_renderDetection = renderDetection;
+window._pairlin_render = render;
+window._pairlin_renderDetection = renderDetection;

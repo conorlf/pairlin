@@ -62,4 +62,4 @@ async function detectIOSS(domain) {
   }
 }
 
-window._landedcost_detectIOSS = detectIOSS;
+window._pairlin_detectIOSS = detectIOSS;

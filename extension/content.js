@@ -1,4 +1,4 @@
-// LandedCost content script — orchestrates all 5 features
+// Pairlin content script — orchestrates all 5 features
 
 const BACKEND_URL = 'https://your-backend.up.railway.app';
 
@@ -28,16 +28,16 @@ async function init() {
   const domain = location.hostname;
 
   // Feature 1: IOSS detection (runs on all page types)
-  const iossResult = await window._landedcost_detectIOSS(domain);
+  const iossResult = await window._pairlin_detectIOSS(domain);
 
   // Show detection banner on product pages
   if (pageType === 'product') {
-    window._landedcost_renderDetection(iossResult);
+    window._pairlin_renderDetection(iossResult);
   }
 
   // Features 2-5: activate on checkout/cart pages
   if (pageType === 'checkout') {
-    window._landedcost_startWatcher(iossResult.status);
+    window._pairlin_startWatcher(iossResult.status);
   }
 }
 
@@ -57,7 +57,7 @@ function loadScript(src) {
   await loadScript('overlay.js');
 
   // Listen for estimate events from basketWatcher
-  window.addEventListener('landedcost:estimate', (e) => {
+  window.addEventListener('pairlin:estimate', (e) => {
     const { estimate, items, iossStatus } = e.detail;
     const pendingOrderData = {
       retailerUrl: location.href,
@@ -67,7 +67,7 @@ function loadScript(src) {
       chosenStrategy: 'keep',
       estimates: estimate,
     };
-    window._landedcost_render(estimate, items, { status: iossStatus }, pendingOrderData);
+    window._pairlin_render(estimate, items, { status: iossStatus }, pendingOrderData);
   });
 
   await init();

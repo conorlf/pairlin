@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "LandedCost",
+  "name": "Pairlin",
   "version": "0.1.0",
   "description": "True landed cost for EU shoppers — IOSS detection, customs calculation, automatic payments.",
   "permissions": ["storage", "activeTab", "scripting"],
@@ -16,6 +16,6 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "LandedCost"
+    "default_title": "Pairlin"
   }
 }
