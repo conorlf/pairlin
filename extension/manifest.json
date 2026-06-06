@@ -16,8 +16,7 @@
       "matches": ["<all_urls>"],
       "js": ["iossDetector.js", "basketWatcher.js", "overlay.js", "content.js"],
       "css": ["styles.css"],
-      "run_at": "document_idle",
-      "world": "MAIN"
+      "run_at": "document_idle"
     },
     {
       "matches": ["<all_urls>"],

@@ -46,7 +46,7 @@ async function init() {
   }
 }
 
-window.addEventListener('landedcost:estimate', (e) => {
+window.addEventListener('pairlin:estimate', (e) => {
   const { estimate, items, iossStatus } = e.detail;
   const pendingOrderData = {
     retailerUrl: location.href,

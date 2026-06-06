@@ -239,7 +239,7 @@ function render(estimate, items, iossResult, pendingOrderData) {
   const { isOver150 } = estimate;
 
   // Attach split handler if present
-  window.dispatchEvent(new CustomEvent('landedcost:rendered'));
+  window.dispatchEvent(new CustomEvent('pairlin:rendered'));
 
   setTimeout(() => {
     document.getElementById('lc-split')?.addEventListener('click', () => {
