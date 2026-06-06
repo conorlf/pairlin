@@ -1,50 +1,21 @@
-//const BACKEND_URL = 'http://localhost:3000';
-
 function detectPageType() {
   const url = location.href;
-  const hasCheckout = /\/(checkout|cart|basket|bag|order|pay)(\/|$|\?)/i.test(url);
+
+  // Checkout / cart pages — URL is the strongest signal
+  if (/\/(checkout|cart|basket|bag|order|pay)(\/|$|\?)/i.test(url)) return 'checkout';
+
+  // Product pages — add-to-cart button or structured product data
   const hasAddToCart = !!document.querySelector(
-    '[data-action="add-to-cart"], button[name="add"], [class*="add-to-cart"], [class*="addToCart"]'
+    '[data-action="add-to-cart"], button[name="add"], [class*="add-to-cart"], [class*="addToCart"], [class*="add_to_cart"], [id*="add-to-cart"]'
   );
-  if (hasCheckout) return 'checkout';
-  if (hasAddToCart) return 'product';
-  return 'browse';
+  const hasProductSchema = !!document.querySelector('[itemtype*="schema.org/Product"]');
+  const hasOgProduct = document.querySelector('meta[property="og:type"]')?.content === 'product';
+  if (hasAddToCart || hasProductSchema || hasOgProduct) return 'product';
+
+  // Collection / category pages — shopping URL segment + multiple price elements
+  const hasShopUrl = /\/(shop|store|collection|category|catalog|sale|new-arrivals|men|women|clothing|shoes|bags|accessories)(\/|$|\?)/i.test(url);
+  const hasManyPrices = document.querySelectorAll('[class*="price"], [itemprop="price"]').length > 2;
+  if (hasShopUrl && hasManyPrices) return 'browse';
+
+  return null; // Not a shopping page — don't activate
 }
-
-function isNonEuRetailer() {
-  const host = location.hostname;
-  return !/(\.ie|\.de|\.fr|\.nl|\.be|\.es|\.it|\.eu|\.at|\.pt|\.pl|\.se|\.dk|\.fi|\.cz|\.gr|\.ro|\.hu)$/.test(host);
-}
-
-async function init() {
-  if (!isNonEuRetailer()) return;
-
-  const pageType = detectPageType();
-  const domain = location.hostname;
-
-  // Feature 1: IOSS detection on all page types
-  const iossResult = await window._pairlin_detectIOSS(domain);
-
-  if (pageType === 'product' || pageType === 'browse') {
-    window._pairlin_renderDetection(iossResult);
-  }
-
-  if (pageType === 'checkout') {
-    window._pairlin_startWatcher(iossResult.status);
-  }
-}
-
-window.addEventListener('pairlin:estimate', (e) => {
-  const { estimate, items, iossStatus } = e.detail;
-  const pendingOrderData = {
-    retailerUrl: location.href,
-    retailerDomain: location.hostname,
-    items,
-    iossStatus,
-    chosenStrategy: 'keep',
-    estimates: estimate,
-  };
-  window._pairlin_render(estimate, items, { status: iossStatus }, pendingOrderData);
-});
-
-init();
