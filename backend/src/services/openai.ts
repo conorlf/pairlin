@@ -1,7 +1,10 @@
 import OpenAI from 'openai';
 import 'dotenv/config';
 
-export const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+export const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  ...(process.env.OPENAI_PROJECT_ID ? { project: process.env.OPENAI_PROJECT_ID } : {}),
+});
 
 function vectorStoreTools() {
   const id = process.env.OPENAI_VECTOR_STORE_ID;
@@ -26,24 +29,54 @@ async function jsonCompletion(prompt: string, systemPrompt: string): Promise<unk
   return JSON.parse(match[0]);
 }
 
-export async function detectIOSS(pageText: string): Promise<{
+// IOSS detection gets its own completion with web search enabled.
+// GPT-4o can search for the retailer's IOSS/VAT status online and combine
+// that with the page text — giving a much more confident and accurate result.
+async function iossCompletion(prompt: string, systemPrompt: string): Promise<unknown> {
+  const vectorId = process.env.OPENAI_VECTOR_STORE_ID;
+  const tools: object[] = [{ type: 'web_search_preview' }];
+  if (vectorId) tools.push({ type: 'file_search', vector_store_ids: [vectorId] });
+
+  const response = await openai.responses.create({
+    model: 'gpt-4o',
+    tools: tools as Parameters<typeof openai.responses.create>[0]['tools'],
+    input: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: prompt },
+    ],
+  });
+  const text = response.output_text;
+  const match = text.match(/\{[\s\S]*\}/);
+  if (!match) throw new Error('No JSON in OpenAI response');
+  return JSON.parse(match[0]);
+}
+
+export async function detectIOSS(domain: string, pageText = ''): Promise<{
   status: 'ioss' | 'not_ioss' | 'unknown';
   confidence: number;
   signalsFound: string[];
 }> {
   const truncated = pageText.slice(0, 6000);
-  return jsonCompletion(
-    `Analyse this checkout page text for IOSS registration signals:\n\n${truncated}`,
-    `You are an EU customs expert. Analyse the provided checkout page text and determine if the retailer is IOSS registered.
-Return JSON only:
+  const pageSection = truncated
+    ? `Page text from their website:\n${truncated}\n\n`
+    : '';
+  return iossCompletion(
+    `Retailer domain: ${domain}\n\n${pageSection}Use web search to find information about this retailer's IOSS registration, EU VAT status, and customs policy for EU shoppers.`,
+    `You are an EU customs and VAT compliance expert. Determine whether a retailer is registered under the EU IOSS (Import One-Stop Shop) scheme.
+
+IOSS-registered retailers collect EU VAT at checkout — customers pay no additional charges on delivery for orders under €150.
+Non-IOSS retailers do not collect EU VAT — customers pay customs duty and VAT when the parcel arrives at the border.
+
+Use the web search tool to look up this retailer's IOSS/VAT status from sources like their shipping policy pages, EU customs databases, consumer forums, and news articles. Combine web findings with the page text provided.
+
+From July 2026, IOSS retailers also charge €3 per tariff heading at checkout — this is a definitive IOSS signal.
+
+Return JSON only — no other text:
 {
   "status": "ioss" | "not_ioss" | "unknown",
   "confidence": 0-100,
-  "signalsFound": ["list of specific signals you detected"]
-}
-IOSS indicators: VAT displayed at checkout, "all taxes included", "duties and taxes paid", EU VAT number visible, EUR pricing with VAT line item.
-Non-IOSS indicators: "customs charges may apply", "duties are buyer's responsibility", GBP pricing without VAT, vague customs policy.
-From July 2026, IOSS retailers charge €3 per tariff heading at checkout — this is a new IOSS indicator.`
+  "signalsFound": ["plain English description of each signal found, noting whether it came from the page text or web search"]
+}`
   ) as Promise<{ status: 'ioss' | 'not_ioss' | 'unknown'; confidence: number; signalsFound: string[] }>;
 }
 

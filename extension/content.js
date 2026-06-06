@@ -1,6 +1,6 @@
 // Pairlin content script — orchestrates all 5 features
 
-const BACKEND_URL = 'https://your-backend.up.railway.app';
+const BACKEND_URL = 'http://localhost:3000';
 
 // Theme detection — tell the background script which icon to show
 (function syncTheme() {

@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://your-backend.up.railway.app'; // replaced at deploy
+const BACKEND_URL = 'http://localhost:3000'; // replaced at deploy
 
 // TLD heuristic — used only when domain not in DB and before page text is available.
 // Non-EU TLDs suggest the retailer is likely outside IOSS scope.

@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://your-backend.up.railway.app';
+const BACKEND_URL = 'http://localhost:3000';
 
 let debounceTimer = null;
 let lastBasketHash = '';
