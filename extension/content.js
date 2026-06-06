@@ -2,6 +2,16 @@
 
 const BACKEND_URL = 'https://your-backend.up.railway.app';
 
+// Theme detection — tell the background script which icon to show
+(function syncTheme() {
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  function send(dark) {
+    chrome.runtime.sendMessage({ type: 'SET_THEME', dark }).catch(() => {});
+  }
+  send(mq.matches);
+  mq.addEventListener('change', (e) => send(e.matches));
+})();
+
 function detectPageType() {
   const url = location.href;
   const hasCheckout = /\/(checkout|cart|basket|bag|order|pay)(\/|$|\?)/i.test(url);
