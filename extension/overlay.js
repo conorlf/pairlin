@@ -1,5 +1,5 @@
-const BACKEND_URL = 'https://your-backend.up.railway.app';
-const CHECKOUT_URL = 'https://app.pairlin.io/checkout';
+//const BACKEND_URL = 'https://your-backend.up.railway.app';
+//const CHECKOUT_URL = 'https://app.pairlin.io/checkout';
 
 function fmt(n) { return '€' + Number(n).toFixed(2); }
 function conf(c) { return `<span class="lc-conf" title="AI confidence">${c}%</span>`; }
