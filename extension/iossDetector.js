@@ -1,7 +1,5 @@
-const BACKEND_URL = 'https://your-backend.up.railway.app'; // replaced at deploy
+const BACKEND_URL = 'http://localhost:3000';
 
-// TLD heuristic — used only when domain not in DB and before page text is available.
-// Non-EU TLDs suggest the retailer is likely outside IOSS scope.
 const NON_EU_TLDS = ['.com', '.co.uk', '.net', '.io', '.us', '.ca', '.au'];
 const EU_TLDS     = ['.ie', '.de', '.fr', '.nl', '.es', '.it', '.be', '.at', '.pl'];
 
@@ -12,31 +10,31 @@ function tldHeuristic(domain) {
 }
 
 async function detectIOSS(domain) {
-  // Step 1 — extension-local cache (avoids any network call for repeat visits)
-  const cacheKey = `ioss_${domain}`;
-  const cached = await chrome.storage.local.get(cacheKey);
-  if (cached[cacheKey] && Date.now() - cached[cacheKey].ts < 86400000) {
-    return cached[cacheKey].result;
-  }
+  // Step 1 — local cache via localStorage (24h TTL)
+  const cacheKey = `pairlin_ioss_${domain}`;
+  try {
+    const raw = localStorage.getItem(cacheKey);
+    if (raw) {
+      const entry = JSON.parse(raw);
+      if (Date.now() - entry.ts < 86400000) return entry.result;
+    }
+  } catch {}
 
   // Step 2 — shared database lookup
-  // If any previous user already classified this domain, return instantly
   try {
     const dbResp = await fetch(`${BACKEND_URL}/api/detect?domain=${encodeURIComponent(domain)}`);
     const dbResult = await dbResp.json();
     if (dbResult.found) {
       const result = { status: dbResult.status, confidence: dbResult.confidence, source: 'database' };
-      await chrome.storage.local.set({ [cacheKey]: { result, ts: Date.now() } });
+      localStorage.setItem(cacheKey, JSON.stringify({ result, ts: Date.now() }));
       return result;
     }
-  } catch { /* backend unreachable — fall through */ }
+  } catch {}
 
-  // Step 3 — URL/TLD heuristic (instant, no network)
-  // Gives a low-confidence initial signal while the API call is in flight
+  // Step 3 — TLD heuristic while API call runs
   const heuristic = tldHeuristic(domain);
 
-  // Step 4 — full detection API with page text
-  // Returns confidence score, stores result in DB for all future users
+  // Step 4 — full detection with page text + web search
   try {
     const pageText = document.body?.innerText ?? '';
     const resp = await fetch(`${BACKEND_URL}/api/detect`, {
@@ -45,10 +43,9 @@ async function detectIOSS(domain) {
       body: JSON.stringify({ pageText: pageText.slice(0, 8000), domain }),
     });
     const result = await resp.json();
-    await chrome.storage.local.set({ [cacheKey]: { result, ts: Date.now() } });
+    localStorage.setItem(cacheKey, JSON.stringify({ result, ts: Date.now() }));
     return result;
   } catch {
-    // API unreachable — return TLD heuristic as fallback with low confidence
     return { ...heuristic, source: 'tld_heuristic' };
   }
 }

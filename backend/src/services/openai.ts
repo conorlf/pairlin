@@ -29,9 +29,6 @@ async function jsonCompletion(prompt: string, systemPrompt: string): Promise<unk
   return JSON.parse(match[0]);
 }
 
-// IOSS detection gets its own completion with web search enabled.
-// GPT-4o can search for the retailer's IOSS/VAT status online and combine
-// that with the page text — giving a much more confident and accurate result.
 async function iossCompletion(prompt: string, systemPrompt: string): Promise<unknown> {
   const vectorId = process.env.OPENAI_VECTOR_STORE_ID;
   const tools: object[] = [{ type: 'web_search_preview' }];
@@ -61,21 +58,29 @@ export async function detectIOSS(domain: string, pageText = ''): Promise<{
     ? `Page text from their website:\n${truncated}\n\n`
     : '';
   return iossCompletion(
-    `Retailer domain: ${domain}\n\n${pageSection}Use web search to find information about this retailer's IOSS registration, EU VAT status, and customs policy for EU shoppers.`,
+    `Retailer domain: ${domain}\n\n${pageSection}Search for: "${domain} IOSS registration EU VAT", "${domain} customs duty EU", "${domain} import charges Europe". Also check eu-vat.com, avalara, and consumer forums like Reddit for EU buyers' experiences.`,
     `You are an EU customs and VAT compliance expert. Determine whether a retailer is registered under the EU IOSS (Import One-Stop Shop) scheme.
 
 IOSS-registered retailers collect EU VAT at checkout — customers pay no additional charges on delivery for orders under €150.
 Non-IOSS retailers do not collect EU VAT — customers pay customs duty and VAT when the parcel arrives at the border.
 
-Use the web search tool to look up this retailer's IOSS/VAT status from sources like their shipping policy pages, EU customs databases, consumer forums, and news articles. Combine web findings with the page text provided.
+Use the web search tool to search for IOSS registration evidence. Check:
+1. The retailer's own shipping/customs/VAT policy pages
+2. Consumer reports of being charged customs on delivery from this retailer
+3. Any mention of IOSS number, EU VAT registration, or "all taxes included" at checkout
 
-From July 2026, IOSS retailers also charge €3 per tariff heading at checkout — this is a definitive IOSS signal.
+CRITICAL decision rules:
+- If web search finds consumer reports of customs charges on delivery → status: "not_ioss", high confidence
+- If web search finds no IOSS/VAT registration AND the page text has no IOSS signals → status: "not_ioss", moderate confidence (60-75). Do NOT use "unknown" just because evidence is absent — absence of IOSS evidence after a search IS evidence of non-registration.
+- Only use "unknown" if search results are contradictory or the retailer is too obscure to find any data at all
+- If IOSS signals are found (VAT shown at checkout, IOSS number visible, "no customs on delivery" claim) → status: "ioss"
+- From July 2026, IOSS retailers also charge €3 per tariff heading at checkout — this is a definitive IOSS signal
 
 Return JSON only — no other text:
 {
   "status": "ioss" | "not_ioss" | "unknown",
   "confidence": 0-100,
-  "signalsFound": ["plain English description of each signal found, noting whether it came from the page text or web search"]
+  "signalsFound": ["plain English description of each signal found, noting whether it came from the page text or web search, including noting when no IOSS evidence was found in search results"]
 }`
   ) as Promise<{ status: 'ioss' | 'not_ioss' | 'unknown'; confidence: number; signalsFound: string[] }>;
 }
