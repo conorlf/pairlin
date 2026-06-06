@@ -4,6 +4,21 @@ import { createPayment } from '../services/mollie';
 
 export const ordersRouter = Router();
 
+ordersRouter.get('/', async (req: Request, res: Response) => {
+  const userId = req.headers['x-user-id'] as string | undefined;
+
+  let query = supabase
+    .from('orders')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (userId) query = query.eq('user_id', userId);
+
+  const { data, error } = await query;
+  if (error) { res.status(500).json({ error: error.message }); return; }
+  res.json(data);
+});
+
 ordersRouter.post('/', async (req: Request, res: Response) => {
   const {
     userId, retailerUrl, retailerDomain, items, iossStatus,
