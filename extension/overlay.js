@@ -22,8 +22,13 @@ function inject(html) {
   });
 }
 
-function storePendingOrder(payload) {
-  try { localStorage.setItem('pairlin_pendingOrder', JSON.stringify(payload)); } catch {}
+function getCheckoutUrl(payload) {
+  try {
+    const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(payload)))));
+    return `${CHECKOUT_URL}?data=${encoded}`;
+  } catch {
+    return CHECKOUT_URL;
+  }
 }
 
 // Feature 1 — IOSS detection result banner
@@ -112,8 +117,8 @@ function renderIossCostDisplay(estimate, items, pendingOrderData) {
   `);
 
   document.getElementById('lc-protect')?.addEventListener('click', () => {
-    storePendingOrder({ ...pendingOrderData, iossProtection: true, estimates: { baseScenario: { ...baseScenario, serviceFee: 1.99, total: total - serviceFee + 1.99 } } });
-    window.location.href = `${CHECKOUT_URL}?ref=${encodeURIComponent(location.href)}`;
+    const protectedOrder = { ...pendingOrderData, iossProtection: true, estimates: { baseScenario: { ...baseScenario, serviceFee: 1.99, total: total - serviceFee + 1.99 } } };
+    window.location.href = getCheckoutUrl(protectedOrder);
   });
 
   document.getElementById('lc-skip')?.addEventListener('click', () => {
@@ -190,8 +195,7 @@ function renderFullService(estimate, items, iossStatus, pendingOrderData) {
   `);
 
   document.getElementById('lc-pay')?.addEventListener('click', () => {
-    storePendingOrder(pendingOrderData);
-    window.location.href = `${CHECKOUT_URL}?ref=${encodeURIComponent(location.href)}`;
+    window.location.href = getCheckoutUrl(pendingOrderData);
   });
   document.getElementById('lc-proceed')?.addEventListener('click', removeExisting);
 }
@@ -244,12 +248,10 @@ function render(estimate, items, iossResult, pendingOrderData) {
   setTimeout(() => {
     document.getElementById('lc-split')?.addEventListener('click', () => {
       const splitData = { ...pendingOrderData, chosenStrategy: 'split', estimates: { ...estimate, splits: estimate.optimisation?.splits } };
-      storePendingOrder(splitData);
-      window.location.href = `${CHECKOUT_URL}?ref=${encodeURIComponent(location.href)}`;
+      window.location.href = getCheckoutUrl(splitData);
     });
     document.getElementById('lc-place-now')?.addEventListener('click', () => {
-      storePendingOrder(pendingOrderData);
-      window.location.href = `${CHECKOUT_URL}?ref=${encodeURIComponent(location.href)}`;
+      window.location.href = getCheckoutUrl(pendingOrderData);
     });
   }, 100);
 
