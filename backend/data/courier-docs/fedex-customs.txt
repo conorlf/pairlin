@@ -1,0 +1,40 @@
+FEDEX — CUSTOMS AND BROKERAGE FEES (EU IMPORT)
+Source: FedEx published ancillary charges (2025)
+
+CUSTOMS BROKERAGE FEES
+FedEx charges a customs brokerage fee for clearing imports through customs.
+
+FedEx International Priority / Economy:
+- Disbursement fee: 2% of duties and taxes advanced
+- Minimum: €15.00
+- Maximum: €75.00
+
+Informal entry (goods under €1,000):
+- FedEx standard brokerage: €15.00 flat
+- Plus duties and taxes
+
+Formal entry (goods over €1,000):
+- Brokerage: €25.00 + 1.5% of customs value
+- Plus duties and taxes
+
+CUSTOMS NOTIFICATION FROM FEDEX
+Email from: fedex@fedex.com, customs@fedex.com, noreply@fedex.com
+Subject patterns: "Customs clearance required", "Action required: FedEx shipment", "Duties and taxes due"
+FedEx typically attempts delivery and leaves door tag if duties outstanding.
+
+FEDEX PAYMENT PORTAL
+URL: https://www.fedex.com/en-ie/tracking.html (enter tracking → pay duties)
+Also: FedEx Delivery Manager app
+Requires: tracking number, delivery address postcode
+Payment: credit/debit card
+Deadline: 7 days before parcel is returned
+
+FEDEX TRACKING NUMBER FORMAT
+FedEx: 12 digit numeric (e.g. 123456789012)
+FedEx Ground: 15 or 22 digit numeric
+FedEx SmartPost: 20 digit starting with 92
+
+IOSS HANDLING
+FedEx accepts IOSS on qualifying shipments under €150.
+FedEx validates IOSS numbers at clearance.
+Rejected IOSS (validation failure): treated as non-IOSS, full charges applied.

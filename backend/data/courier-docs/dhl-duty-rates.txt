@@ -1,0 +1,48 @@
+DHL EXPRESS — CUSTOMS AND DUTY FEES (EU IMPORT)
+Source: DHL Express published rate cards (2025)
+
+CUSTOMS CLEARANCE FEES (DHL Express)
+DHL charges customs brokerage on behalf of the recipient.
+
+Disbursement fee (advancement of customs duties):
+- 2.5% of total customs duties and taxes advanced
+- Minimum fee: €12.50
+- Maximum fee: €50.00
+
+Import clearance fee:
+- EU imports: €16.00 flat fee per shipment (standard)
+- Express: included in shipping cost if pre-paid by sender
+
+Combined typical charge for a €100 parcel (non-IOSS, 12% duty):
+- Customs duty: €12.00
+- VAT 23%: €25.76
+- DHL advancement fee: €12.50 (minimum, as 2.5% of €37.76 = €0.94, below minimum)
+- Total at door: ~€50.26
+
+Combined typical charge for a €500 parcel (12% duty):
+- Customs duty: €60.00
+- VAT 23%: €128.80
+- DHL advancement fee: €4.72 (2.5% of €188.80)
+- Total at door: ~€193.52
+
+CUSTOMS NOTIFICATION FROM DHL
+DHL sends customs notification via:
+- Email from: dhl-customs@dhl.com, customs-notification@dhl.com, no-reply@dhl.com
+- Subject patterns: "Customs duty payment required", "Your DHL shipment requires payment", "Customs clearance required"
+- SMS to recipient
+
+DHL PAYMENT PORTAL
+URL: https://www.dhl.com/ie-en/home/tracking/payment.html
+Requires: waybill number, last name or postcode
+Payment: credit/debit card, PayPal
+Deadline: 5 business days from notification (parcel held at depot)
+
+DHL TRACKING NUMBER FORMAT
+DHL Express: 10 digit numeric starting with 1 or JD followed by digits
+DHL eCommerce: GM followed by 16 digits
+
+IOSS HANDLING
+DHL accepts IOSS declarations on shipments under €150.
+If IOSS number is valid: no customs charge at door.
+If IOSS number invalid or missing: charges as non-IOSS.
+DHL spot checks IOSS numbers against EU central database.

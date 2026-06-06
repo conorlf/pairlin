@@ -1,0 +1,52 @@
+AN POST CUSTOMS FEES — IRELAND
+Source: An Post official fee schedule (2025-2026)
+
+CUSTOMS CLEARANCE AND HANDLING FEES
+
+Standard customs clearance fee: €3.50 per parcel
+Handling fee: €2.50 per parcel
+Total standard customs charge: €6.00 per parcel
+
+This fee applies when An Post processes a parcel through Irish customs.
+The fee is charged to the recipient regardless of parcel value.
+An Post does not charge this fee if the sender has pre-paid customs (IOSS or DDP).
+
+FROM JULY 2026 — IOSS REFORM
+For IOSS-registered parcels valued under €150:
+- €3.00 per distinct HS tariff heading (EU harmonised handling charge)
+- Replaces previous customs clearance processing
+- Multiple items in same HS heading = single €3 charge
+- An Post processes and collects on behalf of Irish Revenue
+
+CUSTOMS HOLD NOTIFICATION
+An Post sends customs hold notification via:
+- SMS to recipient mobile number
+- Email to recipient email address
+- Physical customs card through letterbox
+Subject line patterns: "Customs charge due", "An Post customs notification", "Parcel held at customs"
+From addresses: customs@anpost.com, notifications@anpost.ie, no-reply@anpost.ie
+
+PAYMENT PORTAL
+URL: https://www.anpost.com/Post-Parcels/Tracking/Customs-Charges
+User enters: tracking number, customs reference number
+Payment methods: credit card, debit card, PayPal
+Payment deadline: typically 16 days from notification
+Late payment: parcel returned to sender after deadline
+
+TRACKING NUMBER FORMATS
+An Post tracking: RR followed by 8 digits and IE (e.g. RR123456789IE)
+USPS tracked: 22 digit numeric
+China Post tracked: RR/RA/EV followed by 8 digits and CN
+
+VAT RATE APPLIED BY AN POST
+An Post applies 23% Irish VAT on top of declared value plus customs duty.
+
+PARCEL VALUE THRESHOLDS
+Under €22: no customs (de minimis — removed July 2021, now all values subject to VAT)
+€22-€150: VAT only (if IOSS not registered); from July 2026 also €3/heading charge
+Over €150: customs duty + VAT (IOSS irrelevant)
+Over €700: formal customs entry required, additional agent fees may apply
+
+CONTACT
+An Post customs helpline: 01 705 7600
+Hours: Monday-Friday 09:00-17:30

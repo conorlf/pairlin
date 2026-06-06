@@ -1,0 +1,71 @@
+IOSS RULES AND ELIGIBILITY — EU VAT ONE STOP SHOP (IMPORT)
+
+IOSS (Import One Stop Shop) was introduced on 1 July 2021 under EU VAT Directive 2017/2455.
+
+ELIGIBILITY
+- Applies to goods imported from outside the EU with intrinsic value not exceeding EUR 150
+- Sellers or marketplace facilitators must register in one EU member state
+- Registration covers all B2C sales to EU consumers
+- Available to EU-based sellers and non-EU sellers (via intermediary where required)
+
+HOW IT WORKS
+- Seller collects VAT at point of sale at the destination country rate
+- Seller declares and remits VAT monthly via the IOSS portal
+- Parcels arrive with IOSS VAT ID printed on customs declaration (CN22/CN23)
+- Customs release parcels without additional VAT/duty collection at border
+- Parcel value must be accurately declared — misrepresentation voids IOSS
+
+JULY 2026 REFORM — €3 PER TARIFF HEADING
+From 1 July 2026, EU reform introduces a €3 customs duty charge per distinct HS tariff heading
+for IOSS-registered goods valued under €150. This replaces the previous zero-duty threshold.
+- Each distinct 4-digit HS heading in a shipment attracts one €3 charge
+- VAT continues to be collected at checkout by IOSS-registered sellers
+- Multiple items from the same HS heading count as one €3 charge
+- Mixed-category baskets (e.g. clothing + cosmetics + accessories) will incur multiple €3 charges
+
+IOSS REGISTERED INDICATORS (for consumer-facing detection)
+- VAT amount displayed and calculated at checkout
+- "All taxes included" or "No additional charges on delivery" language
+- EUR pricing with explicit VAT line item breakdown
+- "Duties and taxes paid" language in terms and conditions
+- Visible EU VAT registration number (format: EUxxxxxxxxxxxxxxx)
+- Checkout confirmation showing VAT collected
+- "Import VAT included" text anywhere on checkout page
+
+NON-IOSS INDICATORS
+- "Customs charges may apply on delivery"
+- "Import duties are the buyer's responsibility"
+- GBP pricing with no VAT mention for EU destinations
+- Vague or absent customs policy
+- No VAT registration number visible
+- No VAT line item at checkout
+- "Prices shown exclude VAT"
+- "International shipping — taxes may apply"
+
+THRESHOLD RULES
+- Under EUR 150: IOSS applies if seller is registered; from July 2026 €3/heading duty still applies
+- EUR 150 and above: IOSS does not apply regardless of registration status
+- Full customs duty + import VAT charged at border for all goods over EUR 150
+- The EUR 150 threshold is based on intrinsic value excluding transport and insurance
+
+COMMON IOSS-REGISTERED RETAILERS (indicative, not exhaustive)
+- Shein (registered, China-origin, high volume, spot checks reported)
+- Temu (registered, China-origin)
+- AliExpress (registered for marketplace sales)
+- Amazon (registered as marketplace facilitator)
+- ASOS (registered, UK-origin)
+- Zara (EU-based, IOSS registered)
+
+RETAILERS KNOWN NOT TO USE IOSS
+- Gymshark (UK-based, not registered as of 2025)
+- Boohoo Group (UK-based, not registered)
+- Many small UK DTC brands post-Brexit
+- US retailers without EU IOSS registration
+
+SPOT CHECK RISK
+Even IOSS-registered parcels can be held at customs due to:
+- Database validation errors (IOSS number not found in customs system)
+- Carrier paperwork errors (wrong IOSS number on label)
+- Spot checks on high-volume retailers (Shein, Temu frequently targeted)
+- Declared value mismatches
+- Restricted or prohibited goods misclassification

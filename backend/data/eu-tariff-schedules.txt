@@ -1,0 +1,250 @@
+EU COMBINED NOMENCLATURE — DUTY RATES FOR CONSUMER GOODS
+Source: EU TARIC database. Rates applicable to imports from third countries (MFN rates).
+VAT rates shown are Republic of Ireland standard rates (23%).
+
+SECTION XI — TEXTILES AND TEXTILE ARTICLES
+
+Chapter 61 — Knitted or crocheted clothing
+HS 6101 — Men's overcoats, knitted: 12%
+HS 6102 — Women's overcoats, knitted: 12%
+HS 6103 — Men's suits, knitted: 12%
+HS 6104 — Women's suits and dresses, knitted: 12%
+HS 6105 — Men's shirts, knitted: 12%
+HS 6106 — Women's blouses, knitted: 12%
+HS 6107 — Men's underpants, pyjamas, knitted: 12%
+HS 6108 — Women's slips, pyjamas, knitted: 12%
+HS 6109 — T-shirts, singlets, knitted: 12%
+HS 6110 — Jerseys, pullovers, sweatshirts, knitted: 12%
+HS 6111 — Babies' garments, knitted: 12%
+HS 6112 — Tracksuits, swimwear, knitted: 12%
+HS 6113 — Garments of rubberised textile: 12%
+HS 6114 — Other garments, knitted: 12%
+HS 6115 — Pantyhose, tights, hosiery: 12%
+HS 6116 — Gloves, knitted: 12%
+HS 6117 — Other made-up clothing accessories, knitted: 12%
+
+Chapter 62 — Not knitted or crocheted clothing (woven)
+HS 6201 — Men's overcoats, woven: 12%
+HS 6202 — Women's overcoats, woven: 12%
+HS 6203 — Men's suits, woven: 12%
+HS 6204 — Women's suits and dresses, woven: 12%
+HS 6205 — Men's shirts, woven: 12%
+HS 6206 — Women's blouses, woven: 12%
+HS 6207 — Men's underpants, woven: 12%
+HS 6208 — Women's slips, woven: 12%
+HS 6209 — Babies' garments, woven: 12%
+HS 6210 — Garments of felt/nonwoven: 12%
+HS 6211 — Tracksuits, swimwear, woven (sportswear): 12%
+HS 6212 — Brassieres, corsets: 12%
+HS 6213 — Handkerchiefs: 12%
+HS 6214 — Shawls, scarves: 12%
+HS 6215 — Ties, bow ties: 12%
+HS 6216 — Gloves, woven: 12%
+HS 6217 — Other clothing accessories, woven: 12%
+
+Chapter 63 — Made-up textile articles
+HS 6301 — Blankets: 12%
+HS 6302 — Bed linen: 12%
+HS 6303 — Curtains: 12%
+HS 6304 — Other furnishing articles: 12%
+HS 6305 — Sacks and bags: 12%
+HS 6306 — Tarpaulins, tents: 12%
+HS 6307 — Other made-up articles: 12%
+HS 6308 — Needlecraft sets: 12%
+HS 6309 — Worn clothing: 12%
+HS 6310 — Used rags: 12%
+
+SECTION XII — FOOTWEAR, HEADGEAR, UMBRELLAS
+
+Chapter 64 — Footwear
+HS 6401 — Waterproof footwear: 17%
+HS 6402 — Other footwear, rubber or plastics outer soles: 17%
+HS 6403 — Footwear with leather outer soles: 17%
+HS 6404 — Footwear with textile outer soles: 17%
+HS 6405 — Other footwear: 17%
+HS 6406 — Parts of footwear: 3%
+
+Chapter 65 — Headgear
+HS 6501 — Hat forms: 3.7%
+HS 6502 — Hat shapes: 3.7%
+HS 6503 — Felt hats: 3.7%
+HS 6504 — Hats, plaited: 3.7%
+HS 6505 — Hats knitted or of lace (caps, beanies): 3.7%
+HS 6506 — Other headgear: 3.7%
+HS 6507 — Hat linings: 3.7%
+
+Chapter 66 — Umbrellas
+HS 6601 — Umbrellas, sun umbrellas: 4.7%
+
+SECTION XIII — ARTICLES OF STONE, CERAMICS, GLASS
+
+Chapter 70 — Glass
+HS 7013 — Glassware: 6.7%
+
+SECTION XIV — PRECIOUS METALS, JEWELLERY
+
+Chapter 71 — Jewellery
+HS 7113 — Articles of jewellery, precious metal: 2.5%
+HS 7114 — Articles of goldsmiths: 2.5%
+HS 7116 — Articles of pearls, precious stones: 3.5%
+HS 7117 — Imitation jewellery: 3.7% (base metals), 3.7% (other)
+HS 7118 — Coin: 0%
+
+SECTION XV — BASE METALS
+
+Chapter 73 — Iron or steel articles
+HS 7326 — Other articles of iron or steel: 2.7%
+
+SECTION XVI — MACHINERY AND ELECTRONICS
+
+Chapter 84 — Machinery
+HS 8414 — Air pumps, fans: 1.7%
+HS 8421 — Centrifuges, filtering machinery: 1.7%
+HS 8423 — Weighing machinery: 1.7%
+HS 8450 — Washing machines: 2.7%
+HS 8451 — Machines for cleaning textile: 2.7%
+HS 8452 — Sewing machines: 2.7%
+HS 8467 — Pneumatic/handheld tools: 1.7%
+HS 8472 — Office machines: 0%
+HS 8473 — Parts for office machines: 0%
+
+Chapter 85 — Electronics
+HS 8501 — Electric motors: 2.7%
+HS 8504 — Transformers, power banks: 0%
+HS 8505 — Electromagnets: 2.7%
+HS 8507 — Batteries: 2.7%
+HS 8508 — Vacuum cleaners: 0%
+HS 8509 — Domestic appliances: 2.7%
+HS 8510 — Shavers, hair clippers: 0%
+HS 8516 — Hair dryers, heaters: 2.7%
+HS 8517 — Telephones, smartphones: 0%
+HS 8518 — Microphones, speakers, headphones, earphones: 0%
+HS 8519 — Sound recording apparatus: 0%
+HS 8521 — Video recording apparatus: 0%
+HS 8523 — USB drives, memory cards, blank media: 0%
+HS 8525 — Cameras, webcams: 0%
+HS 8527 — Radio receivers: 0%
+HS 8528 — Monitors, projectors, TVs: 0%
+HS 8534 — Printed circuits: 0%
+HS 8536 — Switches, connectors, cables: 0%
+HS 8544 — Wires, cables (charging cables): 0%
+
+Chapter 90 — Optical, photographic, medical instruments
+HS 9001 — Optical fibres: 0%
+HS 9004 — Spectacles, goggles: 2.9%
+HS 9013 — Lasers: 2.9%
+HS 9018 — Medical instruments: 0%
+HS 9019 — Therapy apparatus: 0%
+HS 9021 — Orthopaedic appliances: 0%
+HS 9025 — Thermometers: 2.9%
+HS 9029 — Revolution counters: 2.9%
+
+SECTION XVII — VEHICLES
+
+Chapter 87 — Motor vehicles
+HS 8712 — Bicycles: 15%
+HS 8714 — Parts for bicycles: 6%
+HS 8716 — Trailers, non-motorised: 6%
+
+SECTION XVIII — CLOCKS AND WATCHES
+
+Chapter 91 — Clocks and watches
+HS 9101 — Wristwatches, precious metal: 4.5%
+HS 9102 — Wristwatches, other: 4.5%
+HS 9103 — Clocks with watch movements: 4.5%
+HS 9105 — Other clocks: 4.5%
+
+SECTION XIX — ARMS AND AMMUNITION
+(not covered — restricted goods)
+
+SECTION XX — MISCELLANEOUS
+
+Chapter 94 — Furniture
+HS 9401 — Seats: 2.7%
+HS 9402 — Medical furniture: 0%
+HS 9403 — Other furniture: 2.7%
+HS 9404 — Mattresses: 2.7%
+HS 9405 — Lamps, lighting: 2.7%
+
+Chapter 95 — Toys and games
+HS 9503 — Toys: 4.7%
+HS 9504 — Games: 0%
+HS 9505 — Festive articles: 4.7%
+HS 9506 — Sports equipment: 2.9%
+HS 9507 — Fishing tackle: 2.9%
+HS 9508 — Roundabouts, funfair: 4.7%
+
+Chapter 96 — Miscellaneous manufactured articles
+HS 9601 — Worked ivory: 3.7%
+HS 9602 — Worked vegetable materials: 0%
+HS 9603 — Brooms, brushes: 2.7%
+HS 9604 — Sieves by hand: 2.7%
+HS 9605 — Travel sets: 6.7%
+HS 9606 — Buttons: 2.7%
+HS 9607 — Slide fasteners (zips): 6.3%
+HS 9608 — Ballpoint pens: 2.7%
+HS 9609 — Pencils, crayons: 0%
+HS 9610 — Slates, boards: 0%
+HS 9611 — Date, sealing or numbering stamps: 2.7%
+HS 9612 — Typewriter ribbons: 2.7%
+HS 9613 — Cigarette lighters: 3.7%
+HS 9614 — Pipes: 2.7%
+HS 9615 — Combs, hair slides, hair clips, hair accessories: 2.7%
+HS 9616 — Perfume atomisers: 6.7%
+HS 9617 — Vacuum flasks: 6.7%
+HS 9618 — Tailors dummies: 0%
+HS 9619 — Sanitary towels, tampons: 0%
+
+COSMETICS AND PERSONAL CARE (Chapter 33)
+HS 3301 — Essential oils: 0%
+HS 3302 — Mixtures of odoriferous substances: 0%
+HS 3303 — Perfumes, toilet waters: 0%
+HS 3304 — Beauty/make-up preparations (lip gloss, foundation, mascara, eyeshadow): 6.5%
+HS 3305 — Hair preparations (shampoo, conditioner): 6.5%
+HS 3306 — Oral hygiene preparations: 2.7%
+HS 3307 — Shaving preparations, deodorants: 6.5%
+
+BAGS AND LEATHER GOODS (Chapter 42)
+HS 4202 — Handbags, backpacks, wallets, purses: 3.7% (leather), 3.7% (textile), 3.7% (plastic)
+HS 4203 — Articles of apparel, leather gloves: 3.7%
+HS 4205 — Other articles of leather: 3.7%
+
+BOOKS AND PRINTED MATTER (Chapter 49)
+HS 4901 — Printed books: 0%
+HS 4902 — Newspapers, journals: 0%
+HS 4903 — Children's picture books: 0%
+HS 4904 — Music (printed): 0%
+HS 4905 — Maps, charts: 0%
+HS 4906 — Plans, drawings: 0%
+HS 4907 — Unused stamps: 0%
+HS 4908 — Transfers (decalcomanias): 6.7%
+HS 4909 — Greeting cards: 0%
+HS 4910 — Calendars: 0%
+HS 4911 — Other printed matter: 0%
+
+PLASTIC ARTICLES (Chapter 39)
+HS 3923 — Articles of plastics (packaging): 6.5%
+HS 3924 — Tableware, kitchenware of plastics: 6.5%
+HS 3925 — Builders ware of plastics: 6.5%
+HS 3926 — Other articles of plastics (phone cases, cable organizers): 6.5%
+
+KEY CATEGORY DUTY RATE SUMMARY
+Electronics (HS 85xx): 0-2.7% (mostly 0%)
+Books/printed matter (HS 49xx): 0%
+Clothing knitted (HS 61xx): 12%
+Clothing woven (HS 62xx): 12%
+Footwear (HS 64xx): 17%
+Cosmetics (HS 3304-3307): 6.5%
+Hair accessories (HS 9615): 2.7%
+Jewellery (HS 71xx): 2.5-3.7%
+Toys (HS 9503): 4.7%
+Sports equipment (HS 9506): 2.9%
+Bags/leather (HS 4202): 3.7%
+Plastics/phone cases (HS 3926): 6.5%
+Watches (HS 91xx): 4.5%
+Bicycles (HS 8712): 15%
+
+IRELAND VAT RATE
+Standard rate: 23% (applies to most imported consumer goods)
+Reduced rate 13.5%: construction services, fuel (not applicable to most imports)
+Zero rate 0%: food, children's clothing under certain sizes, oral medicines
