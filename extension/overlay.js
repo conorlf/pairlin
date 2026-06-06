@@ -30,8 +30,9 @@ function storePendingOrder(payload) {
 function renderDetection(result) {
   const { status, confidence } = result;
   const isIoss = status === 'ioss';
-  const isUnknown = status === 'unknown';
-
+   // Unknown with confidence < 30 means we're fairly sure it's NOT ioss — treat as not_ioss
+   const isUnknown = status === 'unknown' && confidence >= 30;
+   const isNotIoss = !isIoss && !isUnknown;
   const icon = isIoss ? '✓' : isUnknown ? '⚠️' : '🚨';
   const cls = isIoss ? 'lc-green' : isUnknown ? 'lc-amber' : 'lc-red';
   const label = isIoss
@@ -39,12 +40,14 @@ function renderDetection(result) {
     : isUnknown
     ? `MEDIUM CONFIDENCE — Possibly IOSS (${confidence}% confidence)`
     : `HIGH CONFIDENCE — Not IOSS Registered`;
+    const customsChance = isUnknown ? 100 - confidence : confidence === 0 ? 100 : confidence;
 
   const desc = isIoss
     ? 'This retailer collects VAT and customs at checkout.'
     : isUnknown
     ? `Some signals present but unclear. There is a ${100 - confidence}% chance customs charges may apply on delivery.`
-    : `This retailer does not collect VAT or customs. There is an ${confidence}% chance you will receive a customs charge after delivery.`;
+    : `This retailer does not collect VAT or customs. There is a high chance you will receive a customs charge after delivery.`;
+
 
   inject(`
     <div class="lc-widget ${cls}">
