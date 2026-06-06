@@ -43,6 +43,7 @@ async function detectIOSS(domain) {
       body: JSON.stringify({ pageText: pageText.slice(0, 8000), domain }),
     });
     const result = await resp.json();
+    if (!result.status) return { ...heuristic, source: 'tld_heuristic' };
     localStorage.setItem(cacheKey, JSON.stringify({ result, ts: Date.now() }));
     return result;
   } catch {
