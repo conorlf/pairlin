@@ -5,18 +5,37 @@
   "description": "True landed cost for EU shoppers — IOSS detection, customs calculation, automatic payments.",
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": ["<all_urls>"],
-  "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "js": ["iossDetector.js", "basketWatcher.js", "overlay.js", "content.js"],
-    "css": ["styles.css"],
-    "run_at": "document_idle",
-    "world": "MAIN"
-  }],
+  "icons": {
+    "16": "lighticon.png",
+    "32": "lighticon.png",
+    "48": "lighticon.png",
+    "128": "lighticon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["iossDetector.js", "basketWatcher.js", "overlay.js", "content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["theme-sync.js"],
+      "run_at": "document_idle"
+    }
+  ],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Pairlin"
+    "default_title": "Pairlin",
+    "default_icon": {
+      "16": "lighticon.png",
+      "32": "lighticon.png",
+      "48": "lighticon.png",
+      "128": "lighticon.png"
+    }
   }
 }
