@@ -1,7 +1,12 @@
 import * as postmark from 'postmark';
 import 'dotenv/config';
 
-const client = new postmark.ServerClient(process.env.POSTMARK_SERVER_TOKEN!);
+function getClient() {
+  const token = process.env.POSTMARK_SERVER_TOKEN;
+  if (!token) throw new Error('POSTMARK_SERVER_TOKEN is not set — email sending is disabled');
+  return new postmark.ServerClient(token);
+}
+
 const FROM = `LandedCost <noreply@${process.env.PLATFORM_DOMAIN ?? 'orders.landedcost.io'}>`;
 
 export async function forwardEmail(params: {
@@ -16,7 +21,7 @@ export async function forwardEmail(params: {
     <a href="${process.env.PLATFORM_CHECKOUT_URL?.replace('/checkout', '/dashboard') ?? '#'}">View in dashboard →</a>
   </div>`;
 
-  await client.sendEmail({
+  await getClient().sendEmail({
     From: FROM,
     To: params.to,
     Subject: `[Forwarded] ${params.subject}`,
@@ -30,7 +35,7 @@ export async function sendNotification(params: {
   subject: string;
   htmlBody: string;
 }) {
-  await client.sendEmail({
+  await getClient().sendEmail({
     From: FROM,
     To: params.to,
     Subject: params.subject,
@@ -46,7 +51,7 @@ export async function sendWithAttachment(params: {
   attachmentContent: Buffer;
   attachmentContentType: string;
 }) {
-  await client.sendEmail({
+  await getClient().sendEmail({
     From: FROM,
     To: params.to,
     Subject: params.subject,
