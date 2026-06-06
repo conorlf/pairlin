@@ -12,11 +12,17 @@ function detectPageType() {
   if (/\/(checkout|cart|basket|bag|order|pay)(\/|$|\?)/i.test(url)) return 'checkout';
 
   const hasAddToCart = !!document.querySelector(
-    '[data-action="add-to-cart"], button[name="add"], [class*="add-to-cart"], [class*="addToCart"], [class*="add_to_cart"], [id*="add-to-cart"]'
+    '[data-action="add-to-cart"], button[name="add"], [class*="add-to-cart"], [class*="addToCart"], [class*="add_to_cart"], [id*="add-to-cart"], [aria-label*="add to cart" i], [aria-label*="add to bag" i], [aria-label*="add to basket" i], [data-qa*="add-to-cart" i], [data-testid*="add-to-cart" i]'
   );
   const hasProductSchema = !!document.querySelector('[itemtype*="schema.org/Product"]');
   const hasOgProduct = document.querySelector('meta[property="og:type"]')?.content === 'product';
-  if (hasAddToCart || hasProductSchema || hasOgProduct) return 'product';
+  const hasProductUrl = /\/(product|products|item|items|p|dp|pdp|detail|details)\/./i.test(url);
+  const hasPrice = !!document.querySelector(
+    '[itemprop="price"], [class*="product-price"], [class*="ProductPrice"], [class*="product__price"], [class*="price--sale"], [data-testid*="price"]'
+  );
+  const hasPriceWithProductUrl = hasPrice && hasProductUrl;
+
+  if (hasAddToCart || hasProductSchema || hasOgProduct || hasPriceWithProductUrl) return 'product';
 
   const hasShopUrl = /\/(shop|store|collection|category|catalog|sale|new-arrivals|men|women|clothing|shoes|bags|accessories)(\/|$|\?)/i.test(url);
   const hasManyPrices = document.querySelectorAll('[class*="price"], [itemprop="price"]').length > 2;
