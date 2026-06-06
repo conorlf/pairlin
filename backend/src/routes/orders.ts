@@ -4,21 +4,6 @@ import { createPayment } from '../services/mollie';
 
 export const ordersRouter = Router();
 
-ordersRouter.get('/', async (req: Request, res: Response) => {
-  const userId = req.headers['x-user-id'] as string | undefined;
-
-  let query = supabase
-    .from('orders')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (userId) query = query.eq('user_id', userId);
-
-  const { data, error } = await query;
-  if (error) { res.status(500).json({ error: error.message }); return; }
-  res.json(data);
-});
-
 ordersRouter.post('/', async (req: Request, res: Response) => {
   const {
     userId, retailerUrl, retailerDomain, items, iossStatus,
@@ -118,6 +103,16 @@ ordersRouter.post('/', async (req: Request, res: Response) => {
 
   await supabase.from('orders').update({ mollie_payment_id: payment.id }).eq('id', data.id);
   res.json({ orderId: data.id, paymentUrl: payment.getCheckoutUrl() });
+});
+
+ordersRouter.get('/', async (req: Request, res: Response) => {
+  const { data, error } = await supabase
+    .from('orders')
+    .select('id, retailer_domain, basket_value_eur, status, created_at, ioss_protection, split_group_id, split_index, tracking_number')
+    .order('created_at', { ascending: false });
+
+  if (error) { res.status(500).json({ error: error.message }); return; }
+  res.json(data);
 });
 
 ordersRouter.get('/:id', async (req: Request, res: Response) => {

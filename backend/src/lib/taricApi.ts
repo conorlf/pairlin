@@ -93,8 +93,14 @@ export async function getLiveDutyRate(
       if (match) dutyRate = parseFloat(match[1]) / 100;
     }
 
-    // Fall back to zero if commodity has no third-country duty (e.g. electronics)
+    // If no measure found at this HS level (e.g. 4-digit heading has no rate),
+    // cross-check against local table. A zero from the API on a dutiable chapter
+    // means the code is too broad — use the local rate instead.
     if (dutyRate === null && dutyStr === null) dutyRate = 0;
+    const localRate = localFallbackRate(hsCode);
+    if (dutyRate === 0 && localRate > 0) {
+      dutyRate = localRate;
+    }
 
     const description: string | null =
       data?.data?.attributes?.description ?? null;
