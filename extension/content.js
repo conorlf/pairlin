@@ -2,6 +2,8 @@ const NON_RETAILER_RE = /(?:^|\.)(?:google|googleapis|googleadservices|bing|yaho
 
 function isNonEuRetailer() {
   const host = location.hostname;
+  // Never run on our own checkout or localhost
+  if (host === 'localhost' || host === '127.0.0.1') return false;
   if (NON_RETAILER_RE.test(host)) return false;
   return !/(\.ie|\.de|\.fr|\.nl|\.be|\.es|\.it|\.eu|\.at|\.pt|\.pl|\.se|\.dk|\.fi|\.cz|\.gr|\.ro|\.hu)$/.test(host);
 }
@@ -34,15 +36,19 @@ async function init() {
   if (!isNonEuRetailer()) return;
 
   const domain = location.hostname;
+  const pageType = detectPageType();
   const iossResult = await window._pairlin_detectIOSS(domain);
 
-  // Always show the detection banner on any non-EU retailer page
-  window._pairlin_renderDetection(iossResult);
-
-  // On checkout pages also run the basket watcher for full cost breakdown
-  const pageType = detectPageType();
   if (pageType === 'checkout') {
+    // Checkout: show full cost breakdown only — no detection banner
     window._pairlin_startWatcher(iossResult.status);
+  } else {
+    // Browse/product: show detection banner once per domain per session
+    const seenKey = `pairlin_seen_${domain}`;
+    if (!sessionStorage.getItem(seenKey)) {
+      sessionStorage.setItem(seenKey, '1');
+      window._pairlin_renderDetection(iossResult);
+    }
   }
 }
 
