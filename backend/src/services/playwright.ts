@@ -33,7 +33,7 @@ const CARD = {
   number: process.env.PLATFORM_CARD_NUMBER ?? '',
   expiry: process.env.PLATFORM_CARD_EXPIRY ?? '',
   cvc: process.env.PLATFORM_CARD_CVC ?? '',
-  name: process.env.PLATFORM_CARD_NAME ?? 'LandedCost Platform',
+  name: process.env.PLATFORM_CARD_NAME ?? 'Pairlin Platform',
 };
 
 async function fillField(page: Page, selectors: string[], value: string): Promise<boolean> {

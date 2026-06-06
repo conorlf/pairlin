@@ -63,8 +63,8 @@ ordersRouter.post('/', async (req: Request, res: Response) => {
     const payment = await createPayment({
       orderId: splitGroupId,
       amountEur: sc.total,
-      description: `LandedCost split order — ${retailerDomain}`,
-      redirectUrl: `${checkoutUrl}/confirmation?splitGroup=${splitGroupId}`,
+      description: `Pairlin split order — ${retailerDomain}`,
+      redirectUrl: `${checkoutUrl}/orders`,
       webhookUrl: `${backendUrl}/webhooks/mollie`,
       metadata: { orderIds: orderIds.join(','), splitGroupId },
     });
@@ -90,29 +90,57 @@ ordersRouter.post('/', async (req: Request, res: Response) => {
     ioss_protection: iossProtection ?? false,
   }).select().single();
 
-  if (error) { res.status(500).json({ error: error.message }); return; }
+  if (error) {
+    console.error('[orders] Supabase insert error:', error.message);
+    res.status(500).json({ error: error.message });
+    return;
+  }
 
-  const payment = await createPayment({
-    orderId: data.id,
-    amountEur: sc.total,
-    description: `LandedCost — ${retailerDomain}`,
-    redirectUrl: `${checkoutUrl}/confirmation?orderId=${data.id}`,
-    webhookUrl: `${backendUrl}/webhooks/mollie`,
-    metadata: { orderId: data.id },
-  });
+  try {
+    const payment = await createPayment({
+      orderId: data.id,
+      amountEur: sc.total,
+      description: `Pairlin — ${retailerDomain}`,
+      redirectUrl: `${checkoutUrl}/orders/${data.id}`,
+      webhookUrl: `${backendUrl}/webhooks/mollie`,
+      metadata: { orderId: data.id },
+    });
 
-  await supabase.from('orders').update({ mollie_payment_id: payment.id }).eq('id', data.id);
-  res.json({ orderId: data.id, paymentUrl: payment.getCheckoutUrl() });
+    await supabase.from('orders').update({ mollie_payment_id: payment.id }).eq('id', data.id);
+    res.json({ orderId: data.id, paymentUrl: payment.getCheckoutUrl() });
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('[orders] Mollie payment error:', msg);
+    res.status(500).json({ error: msg });
+  }
 });
 
 ordersRouter.get('/', async (req: Request, res: Response) => {
   const { data, error } = await supabase
     .from('orders')
-    .select('id, retailer_domain, basket_value_eur, status, created_at, ioss_protection, split_group_id, split_index, tracking_number')
+    .select('id, retailer_domain, basket_value_eur, status, created_at, ioss_status, ioss_protection, split_group_id, split_index, tracking_number')
     .order('created_at', { ascending: false });
 
   if (error) { res.status(500).json({ error: error.message }); return; }
-  res.json(data);
+
+  const norm = (d: string) => d.replace(/^www\./, '');
+
+  const domains = [...new Set((data ?? []).map(o => o.retailer_domain).filter(Boolean))];
+  const lookupDomains = [...new Set(domains.flatMap(d => [d, norm(d)]))];
+  const { data: retailers } = lookupDomains.length
+    ? await supabase.from('retailers').select('domain, ioss_status').in('domain', lookupDomains)
+    : { data: [] };
+
+  const retailerMap: Record<string, string> = {};
+  for (const r of (retailers ?? []) as { domain: string; ioss_status: string }[]) {
+    retailerMap[r.domain] = r.ioss_status;
+    retailerMap[norm(r.domain)] = r.ioss_status;
+  }
+
+  res.json((data ?? []).map(o => ({
+    ...o,
+    ioss_status: o.ioss_status ?? retailerMap[o.retailer_domain] ?? retailerMap[norm(o.retailer_domain)] ?? null,
+  })));
 });
 
 ordersRouter.get('/:id', async (req: Request, res: Response) => {

@@ -101,13 +101,14 @@ export async function classifyTariff(item: {
     `You are an EU customs tariff expert. Classify the product using the EU Combined Nomenclature.
 Return JSON only:
 {
-  "hsCode": "4-digit HS code as string e.g. '6109'",
+  "hsCode": "6-digit HS subheading as a plain string with no dots e.g. '611020'",
   "hsDescription": "short description e.g. 'T-shirts, knitted'",
   "dutyRate": 0.12,
   "vatRate": 0.23,
   "confidence": 85
 }
-Key rates: clothing (61xx/62xx) 12%, footwear (64xx) 17%, electronics (85xx) 0%, cosmetics (33xx) 6.5%, bags (4202) 3.7%, books (49xx) 0%. VAT rate for Ireland is 23%.`
+Key rates: clothing (61xx/62xx) 12%, footwear (64xx) 17%, electronics (85xx) 0%, cosmetics (33xx) 6.5%, bags (4202) 3.7%, books (49xx) 0%. VAT rate for Ireland is 23%.
+For clothing, default to the cotton subheading when material is unknown (e.g. 611020 for hoodies, 610910 for t-shirts).`
   ) as Promise<{ hsCode: string; hsDescription: string; dutyRate: number; vatRate: number; confidence: number }>;
 }
 

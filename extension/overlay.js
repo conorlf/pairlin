@@ -2,6 +2,10 @@ const CHECKOUT_URL = 'http://localhost:3000/checkout';
 
 function fmt(n) { return '€' + Number(n).toFixed(2); }
 function conf(c) { return `<span class="lc-conf" title="AI confidence">${c}%</span>`; }
+function fmtHs(code) {
+  const s = String(code || '').replace(/\D/g, '');
+  return s.length >= 6 ? s.slice(0, 4) + '.' + s.slice(4, 6) : s;
+}
 
 function removeExisting() {
   document.getElementById('pairlin-overlay')?.remove();
@@ -142,7 +146,7 @@ function renderFullService(estimate, items, iossStatus, pendingOrderData) {
 
   const itemRows = items.map(i =>
     `<div class="lc-line lc-indent">
-      <span>└── ${i.title} (${i.hsDescription})</span>
+      <span>└── ${i.title} (${i.hsDescription}, ${fmtHs(i.hsCode)})</span>
       <span>Duty ${(i.dutyRate * 100).toFixed(0)}% ${conf(i.confidence)}</span>
     </div>`
   ).join('');
