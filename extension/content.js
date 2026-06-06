@@ -23,18 +23,18 @@ async function init() {
   const domain = location.hostname;
 
   // Feature 1: IOSS detection on all page types
-  const iossResult = await window._landedcost_detectIOSS(domain);
+  const iossResult = await window._pairlin_detectIOSS(domain);
 
   if (pageType === 'product' || pageType === 'browse') {
-    window._landedcost_renderDetection(iossResult);
+    window._pairlin_renderDetection(iossResult);
   }
 
   if (pageType === 'checkout') {
-    window._landedcost_startWatcher(iossResult.status);
+    window._pairlin_startWatcher(iossResult.status);
   }
 }
 
-window.addEventListener('landedcost:estimate', (e) => {
+window.addEventListener('pairlin:estimate', (e) => {
   const { estimate, items, iossStatus } = e.detail;
   const pendingOrderData = {
     retailerUrl: location.href,
@@ -44,7 +44,7 @@ window.addEventListener('landedcost:estimate', (e) => {
     chosenStrategy: 'keep',
     estimates: estimate,
   };
-  window._landedcost_render(estimate, items, { status: iossStatus }, pendingOrderData);
+  window._pairlin_render(estimate, items, { status: iossStatus }, pendingOrderData);
 });
 
 init();
