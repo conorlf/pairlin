@@ -71,7 +71,7 @@ async function onBasketChange(iossStatus) {
   lastBasketHash = hash;
 
   try {
-    // Classify items
+    // Classify items — returns HS codes + duty rates but strips price/qty
     const classifyResp = await fetch(`${BACKEND_URL}/api/classify`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -79,16 +79,27 @@ async function onBasketChange(iossStatus) {
     });
     const { items: classified } = await classifyResp.json();
 
+    // Merge original price/currency/qty back in so estimate can convert to EUR
+    const classifiedWithPrices = classified.map((item, idx) => ({
+      ...item,
+      price: items[idx]?.price ?? 0,
+      currency: items[idx]?.currency ?? 'EUR',
+      qty: items[idx]?.qty ?? 1,
+    }));
+
     // Get estimate + optimisation
     const estimateResp = await fetch(`${BACKEND_URL}/api/estimate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: classified, retailerDomain: location.hostname, iossStatus }),
+      body: JSON.stringify({ items: classifiedWithPrices, retailerDomain: location.hostname, iossStatus }),
     });
     const estimate = await estimateResp.json();
 
+    // Use itemsClassified from estimate — it has price_eur computed, needed by overlay display
+    const itemsForOverlay = estimate.itemsClassified ?? classifiedWithPrices;
+
     // Fire custom event for overlay.js to consume
-    window.dispatchEvent(new CustomEvent('pairlin:estimate', { detail: { estimate, items: classified, iossStatus } }));
+    window.dispatchEvent(new CustomEvent('pairlin:estimate', { detail: { estimate, items: itemsForOverlay, iossStatus } }));
   } catch (err) {
     console.warn('[Pairlin] estimate failed:', err);
   }

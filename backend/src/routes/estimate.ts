@@ -61,12 +61,36 @@ estimateRouter.post('/', async (req: Request, res: Response) => {
 
   const estimatedDelay = holdProbability > 50 ? '10-14 days' : null;
 
+  // Duty: always calculate (shown as risk amount for IOSS, actual charge for non-IOSS / over €150)
+  const duty = classifiedItems.reduce((s, i) => s + i.price_eur * i.qty * (i.dutyRate ?? 0), 0);
+
+  // VAT: 0 for IOSS under €150 (retailer collects at point of sale), 23% otherwise
+  const vat = isIoss && !isOver150 ? 0 : (basketTotal + duty) * 0.23;
+
+  // Service fee: optional €1.99 protection for IOSS, flat fee for full service
+  const serviceFee = isIoss && !isOver150 ? 0 : basketTotal >= 150 ? 3.05 : 2.95;
+
+  // Total paid to Pairlin: basket only for IOSS (duty/VAT already at checkout), all-in for non-IOSS
+  const total = isIoss && !isOver150
+    ? basketTotal + serviceFee
+    : basketTotal + duty + vat + serviceFee;
+
+  const r = (n: number) => Math.round(n * 100) / 100;
+
+  const baseScenario = {
+    basketTotal: r(basketTotal),
+    duty: r(duty),
+    vat: r(vat),
+    courierHandling: handlingResult.amount,
+    serviceFee,
+    total: r(total),
+  };
+
   res.json({
-    basketTotal: Math.round(basketTotal * 100) / 100,
+    baseScenario,
     isOver150,
     iossStatus: iossStatus ?? 'unknown',
     distinctHsChapters: chapters,
-    courierHandling: handlingResult,
     holdProbability,
     estimatedDelay,
     optimisation,

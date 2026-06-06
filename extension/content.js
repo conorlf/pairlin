@@ -33,17 +33,14 @@ function detectPageType() {
 async function init() {
   if (!isNonEuRetailer()) return;
 
-  const pageType = detectPageType();
-  if (!pageType) return;
-
   const domain = location.hostname;
-
   const iossResult = await window._pairlin_detectIOSS(domain);
 
-  if (pageType === 'product' || pageType === 'browse') {
-    window._pairlin_renderDetection(iossResult);
-  }
+  // Always show the detection banner on any non-EU retailer page
+  window._pairlin_renderDetection(iossResult);
 
+  // On checkout pages also run the basket watcher for full cost breakdown
+  const pageType = detectPageType();
   if (pageType === 'checkout') {
     window._pairlin_startWatcher(iossResult.status);
   }
